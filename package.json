@@ -2,6 +2,7 @@
   "name": "complaints-fe",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:8080",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
@@ -12,7 +13,10 @@
     "web-vitals": "^1.0.1",
     "styled-components": "^5.1.1",
     "react-device-detect": "^1.17.0",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "serve": "^11.3.2",
+    "axios": "^0.21.1",
+    "http-proxy-middleware": "^2.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

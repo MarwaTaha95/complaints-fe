@@ -4,6 +4,9 @@ import {BUTTONS} from "../basic/Types";
 import {AuthenticationForm} from "../widgets/authentication/AuthenticationForm";
 import {LoginTheme} from "../themes";
 import {Link} from "../basic/Links";
+import LoginService from "../../services/LoginService";
+import ResponseUtils from "../../utils/ResponseUtils";
+import RedirectService from "../../services/RedirectService";
 
 const SignInPage = (props) => {
     const [email, setEmail] = useState({});
@@ -16,7 +19,12 @@ const SignInPage = (props) => {
     };
 
     const loginAction = async () => {
-        // TODO
+        const body = {email: email, password: password};
+        const response = await LoginService.login(body);
+
+        if(ResponseUtils.isValid(response)) {
+            RedirectService.redirect(response.data.redirect, "/home");
+        }
     };
 
     const inputFields = [

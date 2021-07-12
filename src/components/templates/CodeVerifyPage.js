@@ -4,6 +4,9 @@ import {AuthenticationContainer} from "../containers/AuthenticationContainer";
 import {BUTTONS} from "../basic/Types";
 import {AuthenticationForm} from "../widgets/authentication/AuthenticationForm";
 import {RegisterTheme} from "../themes";
+import LoginService from "../../services/LoginService";
+import ResponseUtils from "../../utils/ResponseUtils";
+import RedirectService from "../../services/RedirectService";
 
 const CodeVerifyPage = (props) => {
     const [code, setCode] = useState({});
@@ -16,7 +19,12 @@ const CodeVerifyPage = (props) => {
     ];
 
     const handleCode = async () => {
-        // TODO
+        const body = {code: code, rememberMe: true};
+        const response = await LoginService.verifyCode(body);
+
+        if (ResponseUtils.isValid(response)) {
+            RedirectService.redirect(response.data.redirect, "/home");
+        }
     };
 
     return (

@@ -6,6 +6,9 @@ import {InputField} from "../basic/form/Input";
 import {AuthenticationContainer} from "../containers/AuthenticationContainer";
 import {AuthenticationForm} from "../widgets/authentication/AuthenticationForm";
 import {RegisterTheme} from "../themes";
+import LoginService from "../../services/LoginService";
+import ResponseUtils from "../../utils/ResponseUtils";
+import RedirectService from "../../services/RedirectService";
 
 const linkStyles = {
     fontcolor: '#317EC6',
@@ -35,7 +38,12 @@ export const AdminSignUpPage = (props) => {
     const [email, setEmail] = useState({});
 
     const registerAction = async () => {
-        // TODO
+        const body = {email: email, password: password, name: name, isAdmin: 'true'};
+        const response = await LoginService.register(body);
+
+        if (ResponseUtils.isValid(response)) {
+            RedirectService.redirect(response.data.redirect, "/verify");
+        }
     };
 
     const inputFields = [

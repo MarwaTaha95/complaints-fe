@@ -42,7 +42,7 @@ export const AdminSignUpPage = (props) => {
             changeAction: (event) => setName(event.target.value)
         },
         {
-            type: "text",
+            type: "password",
             label: "Password",
             extraElement: (<Text color={TEXT_COLOR.SECONDARY}
                                  label={"Your password must be at least 8 characters long. Avoid common \n" +

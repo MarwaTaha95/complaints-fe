@@ -9,7 +9,6 @@ import {Icon} from "../../basic/images/Icon";
 import avatar from "../../../assets/images/avatar.svg"
 import {Button} from "../../basic/form/Buttons";
 
-
 export const Navbar = (props) => {
     const isMobile = IsMobile();
 

@@ -10,7 +10,6 @@ import TextArea from "../../basic/form/TextArea";
 import {Select} from "../../basic/form/Select";
 import {PriorityList} from "../../PriorityList";
 
-
 const Box = styled.div`
     width: 750px;
     z-index: 500;
@@ -26,8 +25,7 @@ const Box = styled.div`
     box-sizing: border-box;
     transition: all 0.3s ease-out;
     transform: translateY(${props => !props.show ? '-100vh' : 0});
-    opacity: ${props => props.show ? '1' : '0'};
-    
+    opacity: ${props => props.show ? '1' : '0'};    
 `;
 
 const styles = {

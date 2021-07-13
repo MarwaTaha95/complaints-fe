@@ -70,8 +70,8 @@ const ViewForm = (props) => {
 
                 </Container>
             )
-        }));
-
+        })
+    );
 };
 
 export default ViewComplaint;

@@ -39,9 +39,7 @@ class Auth {
     };
 
     _update(info) {
-        console.log(this.state)
         this.state = info || 'ANONYMOUS';
-        console.log(this.state)
         return this.state;
     }
 }

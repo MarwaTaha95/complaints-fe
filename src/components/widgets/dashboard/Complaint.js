@@ -44,14 +44,19 @@ export const Complaint = (props) => {
                 </Title>
                 <Info {...props}/>
             </Container>
-            {props.isAdmin ? <AdminViewComplaint show={view} cancel={toggleView} item={item} update={update}/> : <ViewComplaint show={view} cancel={toggleView} item={item}/>}
+            {
+                props.isAdmin ?
+                    <AdminViewComplaint show={view} cancel={toggleView} item={item} update={update}/>
+                    :
+                    <ViewComplaint show={view} cancel={toggleView} item={item}/>
+            }
 
         </>
     )
 };
 
 const Info = (props) => {
-    if(props.isAdmin) {
+    if (props.isAdmin) {
         return (
             <Status>
                 {props.item.priority && props.item.priority === 'URGENT' ?

@@ -3,7 +3,6 @@ import {AuthenticationContainer} from "../containers/AuthenticationContainer";
 import {BUTTONS} from "../basic/Types";
 import {AuthenticationForm} from "../widgets/authentication/AuthenticationForm";
 import {LoginTheme} from "../themes";
-import {Link} from "../basic/Links";
 import LoginService from "../../services/LoginService";
 import ResponseUtils from "../../utils/ResponseUtils";
 import RedirectService from "../../services/RedirectService";
@@ -24,7 +23,7 @@ const SignInPage = (props) => {
         const body = {email: email, password: password};
         const response = await LoginService.login(body);
 
-        if(ResponseUtils.isValid(response)) {
+        if (ResponseUtils.isValid(response)) {
             RedirectService.redirect(response.data.redirect, "/home");
         }
     };
@@ -42,9 +41,8 @@ const SignInPage = (props) => {
         }
     ];
 
-    if(isLoading) return null;
-
-    if(AuthService.isAnonymous()){
+    if (isLoading) return null;
+    if (AuthService.isAnonymous()) {
         return (
             <AuthenticationContainer>
                 <AuthenticationForm

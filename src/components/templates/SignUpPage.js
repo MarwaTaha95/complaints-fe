@@ -50,9 +50,6 @@ export const SignUpPage = (props) => {
         }
     ];
 
-    console.log(AuthService.isAnonymous())
-    console.log(isLoading)
-
     if (isLoading) return null;
     if (AuthService.isAnonymous()) {
         return (

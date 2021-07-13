@@ -5,7 +5,6 @@ import ResponseUtils from "../../utils/ResponseUtils";
 import RedirectService from "../../services/RedirectService";
 import LoginService from "../../services/LoginService";
 
-
 export const AdminDashboard = (props) => {
     const [complaints, setComplaints] = useState([]);
 
@@ -15,13 +14,13 @@ export const AdminDashboard = (props) => {
 
     const updateComplaintStatus = async (item) => {
         const response = await DashboardService.update(item);
-        if(!ResponseUtils.isValid(response)) {
+        if (!ResponseUtils.isValid(response)) {
             RedirectService.redirect(response.data.redirect, "/login");
         }
         let newComplains = complaints.slice();
         let index = newComplains.findIndex(c => c.id === item.id);
 
-        if(index !== -1) {
+        if (index !== -1) {
             newComplains.splice(index, 1);
             setComplaints(newComplains)
         }
@@ -29,16 +28,15 @@ export const AdminDashboard = (props) => {
 
     const getComplaints = async () => {
         const response = await DashboardService.getAll();
-        if(!ResponseUtils.isValid(response)) {
+        if (!ResponseUtils.isValid(response)) {
             RedirectService.redirect(response.data.redirect, "/login");
         }
         setComplaints(response.data);
-        console.log(response)
     };
 
     const logout = async () => {
         const response = await LoginService.logout();
-        if(ResponseUtils.isValid(response)) {
+        if (ResponseUtils.isValid(response)) {
             RedirectService.redirect(response.data.redirect, "/login");
         }
     };

@@ -25,9 +25,17 @@ const TextBox = styled.textarea`
 const TextArea = (props) => {
     return (
         <>
-            <Text size={TEXT_SIZE.DISPLAY1} color={TEXT_COLOR.SECONDARY} label={'Description'}
-                  margin={'0 0 6px 0'}/>
-            <TextBox placeholder={props.placeholder} defaultValue={props.text} onChange={props.onChange}/>
+            <Text
+                size={TEXT_SIZE.DISPLAY1}
+                color={TEXT_COLOR.SECONDARY}
+                label={'Description'}
+                margin={'0 0 6px 0'}
+            />
+            <TextBox
+                placeholder={props.placeholder}
+                defaultValue={props.text}
+                onChange={props.onChange}
+            />
         </>
     )
 };

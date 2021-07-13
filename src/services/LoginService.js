@@ -36,7 +36,6 @@ class LoginService {
             console.log('Error ', error);
         }
     }
-
 }
 
 export default LoginService;

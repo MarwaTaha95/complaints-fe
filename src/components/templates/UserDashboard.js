@@ -5,7 +5,6 @@ import ResponseUtils from "../../utils/ResponseUtils";
 import RedirectService from "../../services/RedirectService";
 import LoginService from "../../services/LoginService";
 
-
 export const UserDashboard = (props) => {
     const [complaints, setComplaints] = useState([]);
 
@@ -27,7 +26,6 @@ export const UserDashboard = (props) => {
             RedirectService.redirect(response.data.redirect, "/login");
         }
         setComplaints(response.data)
-        console.log(response)
     };
 
     const logout = async () => {

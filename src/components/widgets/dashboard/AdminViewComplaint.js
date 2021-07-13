@@ -57,7 +57,7 @@ const AdminViewComplaint = (props) => {
     };
 
     const updateItem = () => {
-        const item = {... props.item, status: status};
+        const item = {...props.item, status: status};
         props.update(item);
     };
 
@@ -69,7 +69,12 @@ const AdminViewComplaint = (props) => {
                 <Text size={TEXT_SIZE.HEADER} color={TEXT_COLOR.PRIMARY} label={'View Complaint'}
                       margin={'0 0 20px 0'}/>
                 <ViewForm {...props}/>
-                <Text size={TEXT_SIZE.DISPLAY1} color={TEXT_COLOR.SECONDARY} label={'State'} margin={'25px 0 6px 0'}/>
+                <Text
+                    size={TEXT_SIZE.DISPLAY1}
+                    color={TEXT_COLOR.SECONDARY}
+                    label={'State'}
+                    margin={'25px 0 6px 0'}
+                />
                 <Select onChange={onStateChange} options={states} chosen={status}/>
                 <Container type={CONTAINERS.FLEX} styles={styles2}>
                     <Button
@@ -109,7 +114,8 @@ const ViewForm = (props) => {
 
                 </Container>
             )
-        }));
+        })
+    );
 
 };
 

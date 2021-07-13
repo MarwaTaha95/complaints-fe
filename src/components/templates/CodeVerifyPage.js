@@ -35,8 +35,7 @@ const CodeVerifyPage = (props) => {
         }
     };
 
-    if(isLoading) return null;
-
+    if (isLoading) return null;
     if (AuthService.isAnonymous()) {
         return (
             <AuthenticationContainer>

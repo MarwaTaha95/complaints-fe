@@ -34,7 +34,16 @@ export const DashboardComponent = (props) => {
                 }}
             >
                 <Separator text={props.header}/>
-                {props.complaints && props.complaints.length === 0 ? <EmptyState/> : <ComplaintsList complains={props.complaints} isAdmin={props.isAdmin} update={props.update}/>}
+                {
+                    props.complaints && props.complaints.length === 0 ?
+                    <EmptyState/>
+                    :
+                    <ComplaintsList
+                        complains={props.complaints}
+                        isAdmin={props.isAdmin}
+                        update={props.update}
+                    />
+                }
                 {!props.isAdmin ? <Add src={addButton} onClick={toggleCreatePopup}/> : null}
             </Container>
             <AddComplaint show={displayCreatePopup} cancel={toggleCreatePopup} save={saveNewComplaint}/>

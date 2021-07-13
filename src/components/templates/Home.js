@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {UserDashboard} from "./UserDashboard";
 import AuthService from "../../services/AuthService";
 import {Redirect} from "react-router-dom";
@@ -11,13 +11,13 @@ export const Home = () => {
         AuthService.ensureUpdated().then(() => setIsLoading(false));
     }, []);
 
-    if(isLoading) return null;
+    if (isLoading) return null;
 
-    if(AuthService.isAnonymous()) {
+    if (AuthService.isAnonymous()) {
         return (
             <Redirect to="/login"/>
         );
-    } else if(AuthService.isAdminAuthenticated()) {
+    } else if (AuthService.isAdminAuthenticated()) {
         return (
             <AdminDashboard/>
         )

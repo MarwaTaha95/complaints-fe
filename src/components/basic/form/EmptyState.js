@@ -8,9 +8,18 @@ export const EmptyState = () => {
     return (
         <>
             <Image src={emptyState}/>
-            <Text size={TEXT_SIZE.HEADER} color={TEXT_COLOR.PRIMARY} label={'No complaints'} margin={'10px 0 0 0'}/>
-            <Text size={TEXT_SIZE.DETAIL1} color={TEXT_COLOR.SECONDARY} label={'There are currently no complaints'}
-                  margin={'10px 0 0 0'}/>
+            <Text
+                size={TEXT_SIZE.HEADER}
+                color={TEXT_COLOR.PRIMARY}
+                label={'No complaints'}
+                margin={'10px 0 0 0'}
+            />
+            <Text
+                size={TEXT_SIZE.DETAIL1}
+                color={TEXT_COLOR.SECONDARY}
+                label={'There are currently no complaints'}
+                margin={'10px 0 0 0'}
+            />
         </>
     )
 };

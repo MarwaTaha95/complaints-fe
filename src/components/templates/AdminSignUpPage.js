@@ -52,7 +52,6 @@ export const AdminSignUpPage = (props) => {
     ];
 
     if (isLoading) return null;
-
     if (AuthService.isAnonymous()) {
         return (
             <AuthenticationContainer>

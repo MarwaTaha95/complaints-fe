@@ -68,12 +68,6 @@ const renderBackLink = (backLink) => {
         ) : null
     )
 };
-export const AuthenticationForm = (props) => {
-    var isMobile = IsMobile();
-    return (
-        isMobile ? renderMobileViewForm(props) : renderDesktopViewForm(props)
-    )
-};
 
 const renderMobileViewForm = (props) => {
     return (
@@ -101,4 +95,11 @@ const renderDesktopViewForm = (props) => {
             {renderAlternativePath(props.alternative)}
         </>
     );
+};
+
+export const AuthenticationForm = (props) => {
+    const isMobile = IsMobile();
+    return (
+        isMobile ? renderMobileViewForm(props) : renderDesktopViewForm(props)
+    )
 };

@@ -20,12 +20,6 @@ const SignInPage = (props) => {
         AuthService.ensureUpdated().then(() => setIsLoading(false));
     }, []);
 
-    const linkStyle = {
-        hoverColor: '#36367F',
-        textDecoration: 'underline',
-        margin: '0 0 25px 0'
-    };
-
     const loginAction = async () => {
         const body = {email: email, password: password};
         const response = await LoginService.login(body);
@@ -42,9 +36,8 @@ const SignInPage = (props) => {
             changeAction: (event) => setEmail(event.target.value)
         },
         {
-            type: "text",
+            type: "password",
             label: "Password",
-            extraElement: (<Link styles={linkStyle} text={"Forgot your password?"} path={'/test2'}/>),
             changeAction: event => setPassword(event.target.value)
         }
     ];
@@ -59,7 +52,7 @@ const SignInPage = (props) => {
                     primaryButton={{label: "Sign in", type: BUTTONS.PRIMARY, theme: LoginTheme, onClick: loginAction}}
                     alternative={{
                         linkLabel: 'Sign up',
-                        target: '/signup',
+                        target: '/register',
                         text: "Don't have an account?",
                         margin: '134px 0 0 0'
                     }}

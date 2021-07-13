@@ -48,13 +48,13 @@ const CodeVerifyPage = (props) => {
                     inputs={inputFields}
                     primaryButton={{label: "Verify", type: BUTTONS.PRIMARY, theme: RegisterTheme, onClick: handleCode}}
                     backLink={{
-                        link: {text: 'Back', type: 'secondary-action', path: '/back', icon: back},
+                        link: {text: 'Back', type: 'secondary-action', path: '/register', icon: back},
                         linkMargin: '30px 0 0 0'
                     }}
                     alternative={{
                         linkLabel: 'Sign in',
                         target: '/login',
-                        text: "Don't have an account?",
+                        text: "Already have an account?",
                         margin: '130px 0 0 0'
                     }}
                 />

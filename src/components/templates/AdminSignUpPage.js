@@ -1,8 +1,6 @@
 import React, {useState} from 'react';
 import {Text} from "../basic/Texts";
 import {BUTTONS, TEXT_COLOR, TEXT_SIZE} from "../basic/Types";
-import {Link} from "../basic/Links";
-import {InputField} from "../basic/form/Input";
 import {AuthenticationContainer} from "../containers/AuthenticationContainer";
 import {AuthenticationForm} from "../widgets/authentication/AuthenticationForm";
 import {RegisterTheme} from "../themes";
@@ -11,28 +9,6 @@ import ResponseUtils from "../../utils/ResponseUtils";
 import RedirectService from "../../services/RedirectService";
 import AuthService from "../../services/AuthService";
 import {Redirect} from "react-router-dom";
-
-const linkStyles = {
-    fontcolor: '#317EC6',
-    textDecoration: 'none',
-    fontSize: '11px'
-};
-
-
-const checkbox = (
-    <InputField
-        type={'checkbox'}
-        extraElement={
-            <>
-                <Text size={TEXT_SIZE.DISPLAY2} color={TEXT_COLOR.SECONDARY}>
-                    Agree to ABC&nbsp;
-                    <Link text={'Terms of Service'} path={'/signup'} styles={linkStyles}/>&nbsp;and&nbsp;
-                    <Link text={'Privacy Policy'} path={'/signup'} styles={linkStyles}/>
-                </Text>
-            </>
-        }
-    />
-);
 
 export const AdminSignUpPage = (props) => {
     const [password, setPassword] = useState({});
@@ -75,29 +51,28 @@ export const AdminSignUpPage = (props) => {
         }
     ];
 
-    if(isLoading) return null;
+    if (isLoading) return null;
 
-    if(AuthService.isAnonymous()) {
+    if (AuthService.isAnonymous()) {
         return (
-        <AuthenticationContainer>
-            <AuthenticationForm
-                inputs={inputFields}
-                primaryButton={{
-                    label: "Sign up as admin",
-                    extraElement: checkbox,
-                    type: BUTTONS.PRIMARY,
-                    theme: RegisterTheme,
-                    onClick: registerAction
-                }}
-                alternative={{
-                    linkLabel: 'Sign up',
-                    target: '/signup',
-                    text: "Don't have an account?",
-                    margin: '57px 0 0 0'
-                }}
-            />
-        </AuthenticationContainer>
-    );
+            <AuthenticationContainer>
+                <AuthenticationForm
+                    inputs={inputFields}
+                    primaryButton={{
+                        label: "Sign up as admin",
+                        type: BUTTONS.PRIMARY,
+                        theme: RegisterTheme,
+                        onClick: registerAction
+                    }}
+                    alternative={{
+                        linkLabel: 'Sign in',
+                        target: '/login',
+                        text: "Already have an account?",
+                        margin: '57px 0 0 0'
+                    }}
+                />
+            </AuthenticationContainer>
+        );
     } else {
         return (
             <Redirect to="/home"/>

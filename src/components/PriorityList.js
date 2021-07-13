@@ -4,18 +4,18 @@ import React from "react";
 
 export const PriorityList = [
     {
-        name: 'Urgent',
+        name: 'priority',
         value: 'URGENT',
         extraElement: (<Text size={TEXT_SIZE.DETAIL1} color={TEXT_COLOR.PRIMARY} label={"Urgent"}/>)
     },
     {
-        name: 'Critical',
+        name: 'priority',
         value: 'CRITICAL',
         extraElement: (
             <Text size={TEXT_SIZE.DETAIL1} color={TEXT_COLOR.PRIMARY} label={"Critical"}/>)
     },
     {
-        name: 'Normal',
+        name: 'priority',
         value: 'NORMAL',
         extraElement: (<Text size={TEXT_SIZE.DETAIL1} color={TEXT_COLOR.PRIMARY} label={"Normal"}/>)
     }

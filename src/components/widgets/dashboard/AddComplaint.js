@@ -36,6 +36,12 @@ const styles = {
     width: '280px'
 };
 
+const clients = [
+    {value: 'Client1', label: 'Client1'},
+    {value: 'Client2', label: 'Client2'},
+    {value: 'Client3', label: 'Client3'},
+];
+
 const AddComplaint = (props) => {
     if (!props.show) return null;
 
@@ -103,7 +109,7 @@ const AddForm = (props) => {
                 changeAction={onPriorityChange}
             />
             <Text size={TEXT_SIZE.DISPLAY1} color={TEXT_COLOR.SECONDARY} label={'Client'} margin={'25px 0 6px 0'}/>
-            <Select onChange={onClientChange}/>
+            <Select onChange={onClientChange} options={clients} chosen={client}/>
             <Container type={CONTAINERS.FLEX} styles={styles}>
                 <Button
                     item={{

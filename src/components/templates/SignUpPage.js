@@ -1,8 +1,6 @@
 import React, {useState} from 'react';
 import {Text} from "../basic/Texts";
 import {BUTTONS, TEXT_COLOR, TEXT_SIZE} from "../basic/Types";
-import {Link} from "../basic/Links";
-import {InputField} from "../basic/form/Input";
 import {AuthenticationContainer} from "../containers/AuthenticationContainer";
 import {AuthenticationForm} from "../widgets/authentication/AuthenticationForm";
 import {RegisterTheme} from "../themes";
@@ -11,27 +9,6 @@ import ResponseUtils from "../../utils/ResponseUtils";
 import RedirectService from "../../services/RedirectService";
 import AuthService from "../../services/AuthService";
 import {Redirect} from "react-router-dom";
-
-const linkStyles = {
-    fontcolor: '#317EC6',
-    textDecoration: 'none',
-    fontSize: '11px'
-};
-
-const checkbox = (
-    <InputField
-        type={'checkbox'}
-        extraElement={
-            <>
-                <Text size={TEXT_SIZE.DISPLAY2} color={TEXT_COLOR.SECONDARY}>
-                    Agree to ABC&nbsp;
-                    <Link text={'Terms of Service'} path={'/signup'} styles={linkStyles}/>&nbsp;and&nbsp;
-                    <Link text={'Privacy Policy'} path={'/signup'} styles={linkStyles}/>
-                </Text>
-            </>
-        }
-    />
-);
 
 export const SignUpPage = (props) => {
     const [password, setPassword] = useState({});
@@ -64,7 +41,7 @@ export const SignUpPage = (props) => {
             changeAction: (event) => setName(event.target.value)
         },
         {
-            type: "text",
+            type: "password",
             label: "Password",
             extraElement: (<Text color={TEXT_COLOR.SECONDARY}
                                  label={"Your password must be at least 8 characters long. Avoid common \n" +
@@ -76,7 +53,7 @@ export const SignUpPage = (props) => {
     console.log(AuthService.isAnonymous())
     console.log(isLoading)
 
-    if(isLoading) return null;
+    if (isLoading) return null;
     if (AuthService.isAnonymous()) {
         return (
             <AuthenticationContainer>
@@ -84,15 +61,14 @@ export const SignUpPage = (props) => {
                     inputs={inputFields}
                     primaryButton={{
                         label: "Sign up",
-                        extraElement: checkbox,
                         type: BUTTONS.PRIMARY,
                         theme: RegisterTheme,
                         onClick: registerAction
                     }}
                     alternative={{
-                        linkLabel: 'Sign up',
-                        target: '/signup',
-                        text: "Don't have an account?",
+                        linkLabel: 'Sign in',
+                        target: '/login',
+                        text: "Already have an account?",
                         margin: '57px 0 0 0'
                     }}
                 />

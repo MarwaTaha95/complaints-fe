@@ -42,21 +42,42 @@ export const Complaint = (props) => {
                     <Text size={TEXT_SIZE.DISPLAY1} color={TEXT_COLOR.PRIMARY} label={props.item.title}
                           margin={'0 0 0 0'}/>
                 </Title>
-                <Status>
-                    {props.item.status && props.item.status === 'PENDING' ?
-                        <PendingState/> : props.item.status === 'RESOLVED' ? <ResolvedState/> : <DismissedState/>}
-                    <Text
-                        size={TEXT_SIZE.DISPLAY1}
-                        color={TEXT_COLOR.PRIMARY}
-                        label={props.item.status}
-                        margin={'0 0 0 0'}
-                    />
-                </Status>
+                <Info {...props}/>
             </Container>
             {props.isAdmin ? <AdminViewComplaint show={view} cancel={toggleView} item={item} update={update}/> : <ViewComplaint show={view} cancel={toggleView} item={item}/>}
 
         </>
     )
+};
+
+const Info = (props) => {
+    if(props.isAdmin) {
+        return (
+            <Status>
+                {props.item.priority && props.item.priority === 'URGENT' ?
+                    <PendingState/> : props.item.priority === 'CRITICAL' ? <ResolvedState/> : <DismissedState/>}
+                <Text
+                    size={TEXT_SIZE.DISPLAY1}
+                    color={TEXT_COLOR.PRIMARY}
+                    label={props.item.priority}
+                    margin={'0 0 0 0'}
+                />
+            </Status>
+        )
+    } else {
+        return (
+            <Status>
+                {props.item.status && props.item.status === 'PENDING' ?
+                    <PendingState/> : props.item.status === 'RESOLVED' ? <ResolvedState/> : <DismissedState/>}
+                <Text
+                    size={TEXT_SIZE.DISPLAY1}
+                    color={TEXT_COLOR.PRIMARY}
+                    label={props.item.status}
+                    margin={'0 0 0 0'}
+                />
+            </Status>
+        )
+    }
 };
 
 const PendingState = styled.div`

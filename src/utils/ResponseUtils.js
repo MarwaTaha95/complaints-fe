@@ -1,6 +1,6 @@
 class ResponseUtils {
     static isValid = response =>  {
-        return response && (response.valid || !response.errors);
+        return response && (response.valid || !response.errors || !response.data);
     }
 }
 

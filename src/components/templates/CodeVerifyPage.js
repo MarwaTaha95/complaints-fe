@@ -7,9 +7,17 @@ import {RegisterTheme} from "../themes";
 import LoginService from "../../services/LoginService";
 import ResponseUtils from "../../utils/ResponseUtils";
 import RedirectService from "../../services/RedirectService";
+import AuthService from "../../services/AuthService";
+import {Redirect} from "react-router-dom";
 
 const CodeVerifyPage = (props) => {
     const [code, setCode] = useState({});
+
+    const [isLoading, setIsLoading] = useState(true);
+
+    React.useEffect(() => {
+        AuthService.ensureUpdated().then(() => setIsLoading(false));
+    }, []);
 
     const inputFields = [
         {
@@ -27,28 +35,36 @@ const CodeVerifyPage = (props) => {
         }
     };
 
-    return (
-        <AuthenticationContainer>
-            <AuthenticationForm
-                header={{
-                    header: 'Email verification',
-                    text: 'A verification code has been sent to your email. Please enter the code in the box below in order to verify your account'
-                }}
-                inputs={inputFields}
-                primaryButton={{label: "Verify", type: BUTTONS.PRIMARY, theme: RegisterTheme, onClick: handleCode}}
-                backLink={{
-                    link: {text: 'Back', type: 'secondary-action', path: '/back', icon: back},
-                    linkMargin: '30px 0 0 0'
-                }}
-                alternative={{
-                    linkLabel: 'Sign in',
-                    target: '/login',
-                    text: "Don't have an account?",
-                    margin: '130px 0 0 0'
-                }}
-            />
-        </AuthenticationContainer>
-    )
+    if(isLoading) return null;
+
+    if (AuthService.isAnonymous()) {
+        return (
+            <AuthenticationContainer>
+                <AuthenticationForm
+                    header={{
+                        header: 'Email verification',
+                        text: 'A verification code has been sent to your email. Please enter the code in the box below in order to verify your account'
+                    }}
+                    inputs={inputFields}
+                    primaryButton={{label: "Verify", type: BUTTONS.PRIMARY, theme: RegisterTheme, onClick: handleCode}}
+                    backLink={{
+                        link: {text: 'Back', type: 'secondary-action', path: '/back', icon: back},
+                        linkMargin: '30px 0 0 0'
+                    }}
+                    alternative={{
+                        linkLabel: 'Sign in',
+                        target: '/login',
+                        text: "Don't have an account?",
+                        margin: '130px 0 0 0'
+                    }}
+                />
+            </AuthenticationContainer>
+        );
+    } else {
+        return (
+            <Redirect to="/home"/>
+        );
+    }
 };
 
 export default CodeVerifyPage;

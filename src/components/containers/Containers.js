@@ -44,7 +44,6 @@ const ModalContainer = styled(BasicContainer)`
 
 `;
 
-
 export const Container = (props) => {
     const {type} = props;
 
@@ -53,6 +52,7 @@ export const Container = (props) => {
             return (
                 <DefaultContainer
                     styles={props.styles}
+                    {...props}
                 >
                     {props.children}
                 </DefaultContainer>
@@ -61,6 +61,7 @@ export const Container = (props) => {
             return (
                 <DefaultFlexContainer
                     styles={props.styles}
+                    {...props}
                 >
                     {props.children}
                 </DefaultFlexContainer>
@@ -69,6 +70,7 @@ export const Container = (props) => {
             return (
                 <ModalContainer
                     styles={props.styles}
+                    {...props}
                 >
                     {props.children}
                 </ModalContainer>

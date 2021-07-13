@@ -5,7 +5,7 @@ import {CONTAINERS, TEXT_COLOR, TEXT_SIZE} from "../Types";
 import {Container} from "../../containers/Containers";
 
 const UnStyledInput = (props) => {
-    const {label, onBlur, onChange, onFocus, extraElement} = props;
+    const {label, onBlur, onChange, onFocus, extraElement, type} = props;
     return (
         <>
             <Text
@@ -40,7 +40,7 @@ const DefaultInput = styled.input`
 
 const Input = styled(UnStyledInput)`
     border-radius: 5px;
-    width: 350px;
+    width: ${props => props.width ? props.width : '350px;'}
     height: 48px;
     padding: 20px;
 
@@ -62,6 +62,11 @@ const Checkbox = styled(UnStyledInput)`
     &:active, &:focus{  
         border: 1px solid #36367F;  
     }
+}
+`;
+
+const RadioButton = styled(UnStyledInput)`
+   margin-right: 10px;
 }
 `;
 
@@ -116,11 +121,61 @@ export const InputField = (props) => {
         />
     );
 
+    const renderRadioInput = (props) => {
+        return (
+            <>
+                <Text
+                    size={TEXT_SIZE.DISPLAY1}
+                    color={TEXT_COLOR.SECONDARY}
+                    label={props.label}
+                    margin={'0 0 6px 0'}
+                />
+                <Container
+                    type={CONTAINERS.FLEX}
+                    styles={{justifyContent: 'flex-start'}}
+                >
+                    {props.options && props.options.map(op =>
+                        (
+                            <Container
+                                type={CONTAINERS.FLEX}
+                                styles={{justifyContent: 'flex-start', margin: '0 55px 0 0;', width: 'auto'}}
+                            >
+                                <RadioButton
+                                    onBlur={handleBlur}
+                                    onFocus={handleFocus}
+                                    onChange={handleChange}
+                                    type={type}
+                                    extraElement={op.extraElement}
+                                    value={op.value}
+                                    name={op.name}
+                                />
+                            </Container>
+                        )
+                    )}
+
+                </Container>
+            </>
+        );
+    };
+
+
     switch (type) {
         case 'checkbox':
             return (
                 <Margin margin={'10px 0 10px 0'}>
                     {renderCheckBox(props)}
+                </Margin>
+            );
+        case 'radio':
+            return (
+                <Margin margin={'15px 0 15px 0'}>
+                    {renderRadioInput(props)}
+                </Margin>
+            );
+        case 'textarea':
+            return (
+                <Margin margin={'15px 0 15px 0'}>
+                    {renderDefaultInput(props)}
                 </Margin>
             );
         default:

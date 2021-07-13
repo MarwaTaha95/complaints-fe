@@ -59,13 +59,15 @@ export const SocialButton = styled(UnStyledButton)`
     background: #FFFFFF;
     border: 1px solid #CBD4DB;
     font-size: 12px;
-    width: 350px;
+    width: ${props => props.width ? props.width : '350px;'}
     height: 48px;
     padding-left: 55px;
     padding-right: 55px;
     margin-bottom: 8px;
     color: #0D0D31;
     font-weight: 400;
+    text-align: center;
+    justify-content: center;
     
     &:hover, &:active {  
         background-color: #f0f0f0;
@@ -86,7 +88,7 @@ export const SocialButton = styled(UnStyledButton)`
 
 const PrimaryButton = styled(UnStyledButton)`
     background: ${props => props.theme && props.theme.background ? props.theme.background : '#36367F'};
-    width: 350px;
+    width: ${props => props.width ? props.width : '350px;'}
     height: 48px;
     font-weight: 600;
     font-size: 14px;

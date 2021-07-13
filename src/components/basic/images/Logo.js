@@ -3,14 +3,14 @@ import styled from 'styled-components';
 
 export const Logo = (props) => {
     return (
-        <Subcontainer isMobile={props.isMobile}>
-            <LogoImg src={props.logo} isMobile={props.isMobile}/>
+        <Subcontainer isMobile={props.isMobile} width={props.width}>
+            <LogoImg src={props.logo} isMobile={props.isMobile} width={props.width}/>
         </Subcontainer>
     )
 };
 
 const LogoImg = styled.img`
-    width: 220px;
+    width: ${props => props.width ? props.width : '144px;'}
     margin-bottom: 30px;
     
     ${props => props.isMobile ? `
@@ -23,7 +23,7 @@ const LogoImg = styled.img`
 
 const Subcontainer = styled.div`
     margin: auto;
-    width: 220px;
+    width: ${props => props.width ? props.width : '144px;'}
     
     ${props => props.isMobile ? 'width: 120px;' : null}
 `;

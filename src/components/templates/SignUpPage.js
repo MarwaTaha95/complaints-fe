@@ -9,6 +9,8 @@ import {RegisterTheme} from "../themes";
 import LoginService from "../../services/LoginService";
 import ResponseUtils from "../../utils/ResponseUtils";
 import RedirectService from "../../services/RedirectService";
+import AuthService from "../../services/AuthService";
+import {Redirect} from "react-router-dom";
 
 const linkStyles = {
     fontcolor: '#317EC6',
@@ -35,6 +37,11 @@ export const SignUpPage = (props) => {
     const [password, setPassword] = useState({});
     const [name, setName] = useState({});
     const [email, setEmail] = useState({});
+    const [isLoading, setIsLoading] = useState(true);
+
+    React.useEffect(() => {
+        AuthService.ensureUpdated().then(() => setIsLoading(false));
+    }, []);
 
     const registerAction = async () => {
         const body = {email: email, password: password, name: name};
@@ -66,25 +73,35 @@ export const SignUpPage = (props) => {
         }
     ];
 
-    return (
-        <AuthenticationContainer>
-            <AuthenticationForm
-                inputs={inputFields}
-                primaryButton={{
-                    label: "Sign up",
-                    extraElement: checkbox,
-                    type: BUTTONS.PRIMARY,
-                    theme: RegisterTheme,
-                    onClick: registerAction
-                }}
-                alternative={{
-                    linkLabel: 'Sign up',
-                    target: '/signup',
-                    text: "Don't have an account?",
-                    margin: '57px 0 0 0'
-                }}
-            />
-        </AuthenticationContainer>
-    );
+    console.log(AuthService.isAnonymous())
+    console.log(isLoading)
+
+    if(isLoading) return null;
+    if (AuthService.isAnonymous()) {
+        return (
+            <AuthenticationContainer>
+                <AuthenticationForm
+                    inputs={inputFields}
+                    primaryButton={{
+                        label: "Sign up",
+                        extraElement: checkbox,
+                        type: BUTTONS.PRIMARY,
+                        theme: RegisterTheme,
+                        onClick: registerAction
+                    }}
+                    alternative={{
+                        linkLabel: 'Sign up',
+                        target: '/signup',
+                        text: "Don't have an account?",
+                        margin: '57px 0 0 0'
+                    }}
+                />
+            </AuthenticationContainer>
+        );
+    } else {
+        return (
+            <Redirect to="/home"/>
+        );
+    }
 };
 

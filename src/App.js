@@ -4,6 +4,8 @@ import {Route, Switch} from "react-router-dom";
 import {SignUpPage} from "./components/templates/SignUpPage";
 import {AdminSignUpPage} from "./components/templates/AdminSignUpPage";
 import CodeVerifyPage from "./components/templates/CodeVerifyPage";
+import {Home} from "./components/templates/Home";
+import {AdminDashboard} from "./components/templates/AdminDashboard";
 
 function App() {
 
@@ -13,6 +15,8 @@ function App() {
             <Route path="/registerAdmin" component={AdminSignUpPage}/>
             <Route path="/verify" component={CodeVerifyPage}/>
             <Route path="/login" component={SignInPage}/>
+            <Route path="/home" component={Home}/>
+            {/*<Route path="/admin" component={AdminDashboard}/>*/}
         </Switch>
     );
 }

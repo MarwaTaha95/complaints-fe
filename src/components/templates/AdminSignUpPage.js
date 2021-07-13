@@ -9,6 +9,8 @@ import {RegisterTheme} from "../themes";
 import LoginService from "../../services/LoginService";
 import ResponseUtils from "../../utils/ResponseUtils";
 import RedirectService from "../../services/RedirectService";
+import AuthService from "../../services/AuthService";
+import {Redirect} from "react-router-dom";
 
 const linkStyles = {
     fontcolor: '#317EC6',
@@ -36,6 +38,12 @@ export const AdminSignUpPage = (props) => {
     const [password, setPassword] = useState({});
     const [name, setName] = useState({});
     const [email, setEmail] = useState({});
+
+    const [isLoading, setIsLoading] = useState(true);
+
+    React.useEffect(() => {
+        AuthService.ensureUpdated().then(() => setIsLoading(false));
+    }, []);
 
     const registerAction = async () => {
         const body = {email: email, password: password, name: name, isAdmin: 'true'};
@@ -67,7 +75,10 @@ export const AdminSignUpPage = (props) => {
         }
     ];
 
-    return (
+    if(isLoading) return null;
+
+    if(AuthService.isAnonymous()) {
+        return (
         <AuthenticationContainer>
             <AuthenticationForm
                 inputs={inputFields}
@@ -87,5 +98,10 @@ export const AdminSignUpPage = (props) => {
             />
         </AuthenticationContainer>
     );
+    } else {
+        return (
+            <Redirect to="/home"/>
+        );
+    }
 };
 

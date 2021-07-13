@@ -7,10 +7,18 @@ import {Link} from "../basic/Links";
 import LoginService from "../../services/LoginService";
 import ResponseUtils from "../../utils/ResponseUtils";
 import RedirectService from "../../services/RedirectService";
+import AuthService from "../../services/AuthService";
+import {Redirect} from "react-router-dom";
 
 const SignInPage = (props) => {
     const [email, setEmail] = useState({});
     const [password, setPassword] = useState({});
+
+    const [isLoading, setIsLoading] = useState(true);
+
+    React.useEffect(() => {
+        AuthService.ensureUpdated().then(() => setIsLoading(false));
+    }, []);
 
     const linkStyle = {
         hoverColor: '#36367F',
@@ -41,20 +49,28 @@ const SignInPage = (props) => {
         }
     ];
 
-    return (
-        <AuthenticationContainer>
-            <AuthenticationForm
-                inputs={inputFields}
-                primaryButton={{label: "Sign in", type: BUTTONS.PRIMARY, theme: LoginTheme, onClick: loginAction}}
-                alternative={{
-                    linkLabel: 'Sign up',
-                    target: '/signup',
-                    text: "Don't have an account?",
-                    margin: '134px 0 0 0'
-                }}
-            />
-        </AuthenticationContainer>
-    )
+    if(isLoading) return null;
+
+    if(AuthService.isAnonymous()){
+        return (
+            <AuthenticationContainer>
+                <AuthenticationForm
+                    inputs={inputFields}
+                    primaryButton={{label: "Sign in", type: BUTTONS.PRIMARY, theme: LoginTheme, onClick: loginAction}}
+                    alternative={{
+                        linkLabel: 'Sign up',
+                        target: '/signup',
+                        text: "Don't have an account?",
+                        margin: '134px 0 0 0'
+                    }}
+                />
+            </AuthenticationContainer>
+        )
+    } else {
+        return (
+            <Redirect to="/home"/>
+        );
+    }
 };
 
 export default SignInPage;

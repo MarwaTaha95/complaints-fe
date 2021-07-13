@@ -5,10 +5,8 @@ import {SignUpPage} from "./components/templates/SignUpPage";
 import {AdminSignUpPage} from "./components/templates/AdminSignUpPage";
 import CodeVerifyPage from "./components/templates/CodeVerifyPage";
 import {Home} from "./components/templates/Home";
-import {AdminDashboard} from "./components/templates/AdminDashboard";
 
 function App() {
-
     return (
         <Switch>
             <Route path="/register" component={SignUpPage}/>
@@ -16,7 +14,7 @@ function App() {
             <Route path="/verify" component={CodeVerifyPage}/>
             <Route path="/login" component={SignInPage}/>
             <Route path="/home" component={Home}/>
-            {/*<Route path="/admin" component={AdminDashboard}/>*/}
+            <Route path="/" component={Home}/>
         </Switch>
     );
 }

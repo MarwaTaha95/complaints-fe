@@ -1,16 +1,16 @@
 import React from 'react';
 import {Container} from "../../containers/Containers";
-import {CONTAINERS} from "../../basic/Types";
+import {BUTTONS, CONTAINERS} from "../../basic/Types";
 import IsMobile from "../../Responsive";
 import {Logo} from "../../basic/images/Logo";
 import logo from "../../../assets/images/logo.svg";
 import styled from "styled-components";
-import {Link} from "../../basic/Links";
 import {Icon} from "../../basic/images/Icon";
 import avatar from "../../../assets/images/avatar.svg"
+import {Button} from "../../basic/form/Buttons";
 
 
-export const Navbar = () => {
+export const Navbar = (props) => {
     const isMobile = IsMobile();
 
     return (
@@ -23,16 +23,22 @@ export const Navbar = () => {
             <Subcontainer>
                 <Logo logo={logo} isMobile={isMobile} width={'144px'}/>
             </Subcontainer>
-            <Logout/>
+            <Logout logout={props.logout}/>
         </Container>
     )
 };
 
 const Logout = (props) => {
     return (
-        <Container type={CONTAINERS.FLEX} styles={{width: '130px'}}>
-            <Link text={'Logout'} path={'/api/v1/logout'}
-                  styles={{fontcolor: '#0D0D31', fontSize: '20px'}}/>
+        <Container type={CONTAINERS.FLEX} styles={{width: '170px', alignItems: 'center'}}>
+            <Button
+                item={{
+                    type: BUTTONS.ACTION,
+                    label: 'Logout',
+                    onClick: props.logout,
+                }}
+                width='80px;'
+            />
             <Icon src={avatar} width={'40px'} height={'40px'}/>
         </Container>
 

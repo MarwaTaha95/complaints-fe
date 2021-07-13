@@ -26,6 +26,15 @@ class LoginService {
         } catch (error) {
             console.log('Error ', error);
         }
+    };
+
+    static logout = async () => {
+        try {
+            const response = await ClientService.get('rest/session/logout');
+            return response;
+        } catch (error) {
+            console.log('Error ', error);
+        }
     }
 
 }

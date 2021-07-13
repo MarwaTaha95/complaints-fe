@@ -130,11 +130,9 @@ export const Button = (props) => {
             );
         default:
             return (
-                <Margin bottom={'10px'}>
-                    <UnStyledButton
-                        {...props}
-                    />
-                </Margin>
+                <UnStyledButton
+                    {...props}
+                />
             );
     }
 };

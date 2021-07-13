@@ -23,7 +23,7 @@ export const DashboardComponent = (props) => {
 
     return (
         <>
-            <Navbar/>
+            <Navbar logout={props.logout}/>
             <Container
                 type={CONTAINERS.FLEX}
                 styles={{
